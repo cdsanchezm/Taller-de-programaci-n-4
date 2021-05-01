@@ -13,15 +13,18 @@ public class login extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.setContentType("text/html");
-
+        response.setContentType("text/Formimage.html");
 
         String userName = request.getParameter("userName");
-
         PrintWriter out = response.getWriter();
-        out.println(userName);
-        out.println("lo logre");
-        Cookie name = new Cookie("userName", userName);
+        if (!userName.isEmpty()){
+
+            System.out.println("ingreso exitoso mi pez");
+
+        }else
+            System.out.println("nel perro estas pendejo");
+
+
 
 
 

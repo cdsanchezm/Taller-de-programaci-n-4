@@ -1,0 +1,25 @@
+body {
+    background: rgb(109, 82, 198);
+    background: linear-gradient(90deg, rgba(109, 82, 198, 1) 0%, rgba(31, 114, 212, 1) 100%);
+}
+
+.ingreso {
+    width: 350px;
+    height: 350px;
+    background-color: white;
+    border-radius: 10%;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.cargarImagen {
+    display: none;
+    width: 380px;
+    height: auto;
+    background-color: white;
+    border-radius: 10%;
+    margin-bottom: 5px;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px;
+}
