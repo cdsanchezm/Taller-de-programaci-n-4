@@ -5,13 +5,8 @@ let btnCarga = document.querySelector("#btncargarImagen")
 
 btnIngreso.addEventListener("click", () => {
 
-    var getNombre = document.getElementById("nombreUsuario").value;
-    console.log(location)
-    if (getNombre.length != 0) {
-        location.href  ="Formimage.html";
-    } else {
-        alert("Ingrese su nombre de usuario");
-    }
+    console.log("HOLAAA")
+
 
 })
 
