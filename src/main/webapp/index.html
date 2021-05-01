@@ -55,14 +55,14 @@
                     <h3>Bienvenido</h3>
                 </div>
             </div>
-            <form action="">
+            <form action="Login" method="post">
                 <div class="row g-1 ">
                     <div class="col-12 ">
                         <br>
-                        <input type="text" class="form-control" id="nombreUsuario" placeholder="Nombre usuario " aria-label="Nombre Ususario">
+                        <input type="text" class="form-control" id="nombreUsuario" placeholder="Nombre usuario " aria-label="Nombre Ususario" name="userName">
                     </div>
                     <button type="button" id="btn-ingreso" class="btn btn-primary ">Ingresar</button>
-
+                    <input type="submit" value="login">
                 </div>
             </form>
         </div>
@@ -83,7 +83,7 @@
                     <input type="file" accept=".png , .jpg" class="form-control-file" name="image" id="image">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label"> <strong>Agrega una descripción</strong> </label>
+                    <label for="exampleFormControlTextarea1" class="form-label"> <strong>Agrega una descripciÃ³n</strong> </label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
 
@@ -103,21 +103,7 @@
     let btnIngreso = document.querySelector("#btn-ingreso");
     let btnCarga = document.querySelector("#btncargarImagen")
 
-    btnIngreso.addEventListener("click", () => {
 
-        var getNombre = document.getElementById("nombreUsuario").value;
-        console.log(getNombre);
-
-        if (getNombre.length != 0) {
-
-            panelCarga.style.display = "block";
-            panelIngreso.style.display = "none";
-
-        } else {
-            alert("Ingrese su nombre de usuario");
-        }
-
-    })
 </script>
 
 </body>
