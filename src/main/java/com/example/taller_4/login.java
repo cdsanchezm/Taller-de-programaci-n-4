@@ -12,8 +12,8 @@ import java.io.PrintWriter;
 public class login extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        response.setContentType("text/Formimage.html");
+        String dire="localhost:8080/taller-4-1.0-SNAPSHOT/Formimage.html";
+        response.sendRedirect("http://"+dire);
 
         String userName = request.getParameter("userName");
         PrintWriter out = response.getWriter();
