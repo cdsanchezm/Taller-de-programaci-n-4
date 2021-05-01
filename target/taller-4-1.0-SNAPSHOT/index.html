@@ -37,6 +37,7 @@
 </style>
 
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 80px;">
     <a class="navbar-brand ">
         <img width="120px" height="100px" src="https://estebancardenas14.github.io/ProgrammingWorkshop-2.github.io/img/logo.svg" alt="logoPets" style="margin-left: 150px;" />
@@ -50,14 +51,14 @@
             <div class="row ">
                 <div class="col-12 ">
                     <br><br>
-                    <img src="https://www.flaticon.com/svg/vstatic/svg/599/599305.svg?token=exp=1619732709~hmac=9a5f041e71018fcd4507c57fb9d12e59 " alt=" " width="50px " height="50px ">
+                    <img src= "https://drive.google.com/uc?id=1XgdfCrimOmuwWsrek2-yH8_j-lFNvg4U" alt=" " width="50px " height="50px ">
                     <h3>Bienvenido</h3>
                 </div>
             </div>
             <div class="row g-1 ">
                 <div class="col-12 ">
                     <br>
-                    <input type="text " class="form-control " placeholder="Nombre usuario " aria-label="Nombre Ususario ">
+                    <input type="text " id = "nombre" class="form-control " placeholder="Nombre usuario " aria-label="Nombre Ususario >
                 </div>
 
                 <button type="button " id="btn-ingreso" class="btn btn-primary ">Ingresar</button>
@@ -103,14 +104,15 @@
     var panelCarga = document.querySelector(".cargarImagen");
     var btnIngreso = document.querySelector("#btn-ingreso");
     var btnCarga = document.querySelector("#btncargarImagen")
-
+    let nom = document.querySelector("#nombre")
 
 
     btnIngreso.addEventListener("click", () => {
 
-        panelCarga.style.display = "block";
-        panelIngreso.style.display = "none";
-
+        if (nom.value() != "") {
+            panelCarga.style.display = "block";
+            panelIngreso.style.display = "none";
+        }
     })
 </script>
 
