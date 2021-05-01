@@ -15,12 +15,17 @@ public class login extends HttpServlet {
 
         response.setContentType("text/html");
 
+
         String userName = request.getParameter("userName");
 
         PrintWriter out = response.getWriter();
         out.println(userName);
         out.println("lo logre");
         Cookie name = new Cookie("userName", userName);
+
+
+
+
 
 
     }
