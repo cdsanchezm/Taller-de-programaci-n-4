@@ -15,10 +15,9 @@ public class login extends HttpServlet {
         response.setContentType("text/html");
 
         String name = request.getParameter("userName");
-        String password = request.getParameter("userPassword");
 
         PrintWriter out = response.getWriter();
-        if(name.equals("unbosque") && password.equals("123456"))
+        if(name.equals("unbosque"))
             out.println("Login Success...!");
         else
             out.println("Login Failed...!");
