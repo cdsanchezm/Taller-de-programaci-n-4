@@ -58,7 +58,7 @@
             <div class="row g-1 ">
                 <div class="col-12 ">
                     <br>
-                    <input type="text " class="form-control " placeholder="Nombre usuario " aria-label="Nombre Ususario >
+                    <input type="text " id = "nombre" class="form-control " placeholder="Nombre usuario " aria-label="Nombre Ususario >
                 </div>
 
                 <button type="button " id="btn-ingreso" class="btn btn-primary ">Ingresar</button>
@@ -104,14 +104,15 @@
     var panelCarga = document.querySelector(".cargarImagen");
     var btnIngreso = document.querySelector("#btn-ingreso");
     var btnCarga = document.querySelector("#btncargarImagen")
-
+    let nom = document.querySelector("#nombre")
 
 
     btnIngreso.addEventListener("click", () => {
 
-        panelCarga.style.display = "block";
-        panelIngreso.style.display = "none";
-
+        if (nom.value() != "") {
+            panelCarga.style.display = "block";
+            panelIngreso.style.display = "none";
+        }
     })
 </script>
 
