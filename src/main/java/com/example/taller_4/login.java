@@ -25,12 +25,6 @@ public class login extends HttpServlet {
             System.out.println("nel perro estas pendejo");
 
 
-
-
-
-
-
-
     }
 
 }
