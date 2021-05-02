@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 @WebServlet(name ="Cookie_Img", value = "/cookie_img")
 public class Cookie_Img extends HttpServlet {
@@ -17,6 +18,7 @@ public class Cookie_Img extends HttpServlet {
         String dire2 ="Formimage.html";
         String img = request.getParameter("image");
         PrintWriter out = response.getWriter();
+
 
         if (!img.isEmpty()){
             System.out.println(img);
