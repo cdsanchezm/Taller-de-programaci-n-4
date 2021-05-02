@@ -28,15 +28,18 @@
           <h4>Subir Imagenes</h4>
           <br>
         </div>
+        <form action="Submit-IMG" method="POST">
         <div class="col-12">
           <input type="file" accept=".png , .jpg" class="form-control-file" name="image" id="image">
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label"> <strong>Agrega una descripción</strong> </label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea class="form-control" name="descriptionIMG" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+          <input type="submit" value="subir imagen" id="btn-ingreso" class="btn btn-primary ">
 
-        <button type="button " id="btncargarImagen" class="btn btn-primary ">Subir Imagen</button>
+        </form>
+
 
       </div>
     </div>
