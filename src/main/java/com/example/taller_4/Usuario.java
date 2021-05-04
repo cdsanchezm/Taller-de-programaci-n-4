@@ -6,15 +6,21 @@ import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
-public class usuario implements Serializable {
+public class Usuario implements Serializable {
     private static final long serialVersionUID =1L;
 
     private String name;
     private String description;
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private String fecha;
     @Lob
-    private byte[] image;
+    private String image;
+
+    public Usuario(String name,String image,String description, String fecha){
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.fecha = fecha;
+    }
 
     public String getName() {
         return name;
@@ -32,19 +38,19 @@ public class usuario implements Serializable {
         this.description = description;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

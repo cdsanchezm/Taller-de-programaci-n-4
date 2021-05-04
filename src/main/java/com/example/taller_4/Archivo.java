@@ -19,14 +19,17 @@ public class Archivo {
         if (!archivo.exists()) {
             try {
                 archivo.createNewFile();
+                System.out.println(archivo.getAbsolutePath());
             } catch (IOException e) {
                 // TODO: handle exception
                 e.printStackTrace();
             }
+        }else{
+            System.out.println(archivo.getAbsolutePath()+" Existe");
         }
     }
 
-    public void escribirEnArchivo(ArrayList<usuario> usuario, String archivo) {
+    public void escribirEnArchivo(ArrayList<Usuario> usuario, String archivo) {
         try {
             salida = new ObjectOutputStream(new FileOutputStream(archivo));
             salida.writeObject(usuario);
@@ -36,12 +39,12 @@ public class Archivo {
         }
     }
 
-    public ArrayList<usuario> leerArchivo(File archivo) {
-        ArrayList<usuario> usuarios = new ArrayList<usuario>();
+    public ArrayList<Usuario> leerArchivo(File archivo) {
+        ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
         if (archivo.length() != 0) {
             try {
                 entrada = new ObjectInputStream(new FileInputStream(archivo));
-                usuarios = (ArrayList<usuario>) entrada.readObject();
+                Usuarios = (ArrayList<Usuario>) entrada.readObject();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -50,6 +53,6 @@ public class Archivo {
                 e.printStackTrace();
             }
         }
-        return usuarios;
+        return Usuarios;
     }
 }

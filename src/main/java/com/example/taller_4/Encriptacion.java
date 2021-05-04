@@ -6,15 +6,13 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 
-public class encriptacion {
+public class Encriptacion {
 
     static private final String UNICODE_FORMAT = "UTF-8";
     static SecretKey myKey = generateKey("AES"); // generamos llave
     static  Cipher chipher;
 
-
-public encriptacion (){
-
+public Encriptacion(){
     try {
         chipher = Cipher.getInstance("AES");
     } catch (NoSuchAlgorithmException e) {
@@ -22,11 +20,9 @@ public encriptacion (){
     } catch (NoSuchPaddingException e) {
         e.printStackTrace();
     }
-
 }
 
     public static SecretKey generateKey(String encryptionType){
-
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(encryptionType);
             SecretKey myKey = keyGenerator.generateKey();
@@ -35,14 +31,11 @@ public encriptacion (){
         }catch (Exception r){
             return null;
         }
-
     }
 
 
     public  byte[] encriptar (String dataToEncrypt){
-
         try{
-
             byte[] text = dataToEncrypt.getBytes(UNICODE_FORMAT);
             chipher.init(Cipher.ENCRYPT_MODE, myKey);
             byte[] textEncrypted = chipher.doFinal(text);
@@ -52,13 +45,9 @@ public encriptacion (){
         }catch (Exception m){
             return null;
         }
-
     }
 
-
     public  String desencriptar (String datoEncriptado) {
-
-
         try {
             byte[] dataToDecrypt = encriptar(datoEncriptado);
 
@@ -72,9 +61,5 @@ public encriptacion (){
 
             return null;
         }
-
-
     }
-
-
 }
