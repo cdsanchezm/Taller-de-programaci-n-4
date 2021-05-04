@@ -6,64 +6,66 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.xml.crypto.Data;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import static com.example.taller_4.Constants.UPLOAD_DIRECTORY;
 
-@MultipartConfig
 @WebServlet(name = "submit-img", value = "/Submit-IMG")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class imgSubmit extends HttpServlet {
-    usuario user = new usuario();
-    /*
-    File fi = new File("Archivo.txt");
-    ArrayList<usuario> arruser = new ArrayList<usuario>();
-    */
+    private String ImageName;
+
+    private static final long serialVersionUID = 1L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String Description = request.getParameter("descriptionIMG");
+        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+        File uploadDir = new File(uploadPath);
+
+        if (!uploadDir.exists())
+            uploadDir.mkdir();
         try {
-            Cookie[] Cookies = request.getCookies();
-            for (int i = 0; i < Cookies.length; i++) {
-                if (Cookies[i].getName().equals("userName")) {
-                    user.setName(Cookies[i].getValue());
-                }
+
+            String fileName = "";
+            for (Part part : request.getParts()) {
+                fileName = getFileName(part);
+                part.write(uploadPath + File.separator + fileName);
             }
 
-            Part imagPart = request.getPart("image");
-            int imagSize = (int) imagPart.getSize();
-            byte[] image = null;
-            if (imagSize > 0) {
-                image = new byte[imagSize];
-                try (DataInputStream dis = new DataInputStream(imagPart.getInputStream())) {
-                    dis.readFully(image);
-                }
-            }
-            if (imagSize > 0) {
-                user.setImage(image);
-            }
-         //NO LLEGA
-            user.setDescription(request.getParameter("descriptionIMG"));
-            response.addCookie(new Cookie("Descripcion",user.getDescription()));
 
-            /*
-            Archivo arch = new Archivo(fi);
-            */
+            request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
+            setImageName(fileName);
 
-            Date f = new Date();
+            setImageName(fileName);
+            response.addCookie(new Cookie("ImageName", getImageName()));
+            String fecha = String.valueOf(LocalDateTime.now());
+            response.addCookie(new Cookie("Fecha",fecha));
+            response.addCookie(new Cookie("Description", Description));
 
-            user.setFecha(f);
-            response.addCookie(new Cookie("Fecha",f.toString()));
-
-            PrintWriter out = response.getWriter();
-            out.println(user.getName());
-            out.println(user.getDescription());
-            out.println(user.getFecha());
-/*
-            arruser.add(user);
-            arch.escribirEnArchivo(arruser, "Archivo.txt");
-*/
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ServletException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException fne) {
+            request.setAttribute("message", "There was an error: " + fne.getMessage());
         }
+        getServletContext().getRequestDispatcher("/Formimage.html").forward(request, response);
     }
 
+
+    private String getFileName(Part part) {
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename"))
+                return content.substring(content.indexOf("=") + 2, content.length() - 1);
+        }
+        return Constants.DEFAULT_FILENAME;
+    }
+
+
+    public String getImageName() {
+        return ImageName;
+    }
+
+    public void setImageName(String imageName) {
+        ImageName = imageName;
+    }
 }
+
