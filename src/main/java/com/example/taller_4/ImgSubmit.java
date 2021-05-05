@@ -25,7 +25,6 @@ public class ImgSubmit extends HttpServlet {
         String Description = request.getParameter("descriptionIMG");
         String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
         File uploadDir = new File(uploadPath);
-
         if (!uploadDir.exists())
             uploadDir.mkdir();
         try {
@@ -43,7 +42,6 @@ public class ImgSubmit extends HttpServlet {
                 }
             }
             request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
-            Encriptacion c = new Encriptacion();
             setImageName(fileName);
             response.addCookie(new Cookie("ImageName", getImageName()));
             String fecha = String.valueOf(LocalDateTime.now());
@@ -74,8 +72,6 @@ public class ImgSubmit extends HttpServlet {
     public boolean addUser(String nameUser, String nameImage, String description, String date, ArrayList<Usuario> user) {
 
         boolean verificar = false;
-
-
         Usuario newUser = new Usuario(nameUser, nameImage, description, date);
         user.add(newUser);
 
