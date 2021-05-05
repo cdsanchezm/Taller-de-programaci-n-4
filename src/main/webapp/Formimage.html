@@ -18,6 +18,7 @@
   </a>
   <a><img width="70px" alt="" src=""></a>
 </nav>
+
 <center>
   <div class="cargarImagen">
     <div class="container">
@@ -36,17 +37,28 @@
           <label for="descripcion" class="form-label"> <strong>Agrega una descripción</strong> </label>
           <textarea class="form-control" name="descriptionIMG" id="descripcion" rows="3"></textarea>
         </div>
-          <input type="submit" value="subir imagen" id="btn-upload" class="btn btn-primary ">
+          <input type="submit" value="subir imagen" id="update-table" class="btn btn-primary ">
         </form>
-          <button type="submit" id="update-table" class="btn btn-primary ">Actualizar Tabla</button>
-
-
       </div>
     </div>
   </div>
 
 
 </center>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div id="biblioteca">
+    <hr style="color: white; height: 3px;">
+    <h4 style="color: azure;" class="text-center">Imagenes</h4>
+    <hr style="color: white; height: 3px;">
+  </div>
+</div>
+
 <div class="container" id="bibliotecaImg">
 
   <div class="row" id="IngresarFoto">
@@ -54,11 +66,29 @@
 
   </div>
 </div>
-<script>
-  var botonIngreso = document.getElementById("update-table");
 
-  botonIngreso.addEventListener("click", () => {
-    console.log("jfasofjsaoj")
+
+<script>
+
+  let btnIngreso = document.querySelector("#btn-ingreso");
+  let btnCarga = document.querySelector("#update-table");
+
+
+  btnIngreso.addEventListener("click", () => {
+
+    var getNombre = document.getElementById("nombreUsuario").value;
+    console.log(getNombre);
+
+    if (getNombre.length != 0) {
+
+    } else {
+      alert("Ingrese su nombre de usuario");
+    }
+
+  })
+
+  btnCarga.addEventListener("click", () => {
+
     let foto = document.getElementById("image");
     let descrip = document.getElementById("descripcion");
 
@@ -97,8 +127,8 @@
       button.className = 'btn btn-warning';
       button.innerHTML = 'Descargar'
       button.id = 'btnDescarga';
-      description.innerHTML = descrip.value;
-      image.src = "target\\taller-4-1.0-SNAPSHOT\\upload" + urlImage;
+      description.innerHTML = "Descripcion : "+ descrip.value;
+      image.src = '../target/taller-4-1.0-SNAPSHOT/upload/' + urlImage;
 
       div.appendChild(image);
       div.appendChild(description);
@@ -107,16 +137,14 @@
       col.appendChild(div);
       contenedor.appendChild(col);
 
-
-
       innerHTML(contenedor);
-
 
     }
 
   })
+
 </script>
-<script src="JS/FormImage.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js " integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf " crossorigin="anonymous "></script>
 
 </body>

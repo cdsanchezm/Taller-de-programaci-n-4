@@ -52,9 +52,8 @@ public class ImgSubmit extends HttpServlet {
             request.setAttribute("message", "There was an error: " + fne.getMessage());
         }
         getServletContext().getRequestDispatcher("/Formimage.html").forward(request, response);
+
     }
-
-
 
     private String getFileName(Part part) {
         for (String content : part.getHeader("content-disposition").split(";")) {
