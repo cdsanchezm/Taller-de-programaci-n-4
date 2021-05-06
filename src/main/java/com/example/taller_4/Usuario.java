@@ -1,25 +1,20 @@
 package com.example.taller_4;
 
-import javax.persistence.Lob;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
 
 public class Usuario implements Serializable {
     private static final long serialVersionUID =1L;
 
     private String name;
     private String description;
-    private String fecha;
-    @Lob
+    private String date;
     private String image;
 
-    public Usuario(String name,String image,String description, String fecha){
+    public Usuario(String name,String image,String description, String date){
         this.name = name;
         this.image = image;
         this.description = description;
-        this.fecha = fecha;
+        this.date = date;
     }
 
     public String getName() {
@@ -38,12 +33,12 @@ public class Usuario implements Serializable {
         this.description = description;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDate() {
+        return date;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getImage() {
@@ -52,5 +47,15 @@ public class Usuario implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date='" + date + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }
