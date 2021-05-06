@@ -79,6 +79,9 @@
                 let description = document.createElement('p');
                 let date = document.createElement('h6');
                 let image = document.createElement('img');
+
+                let tagName = document.createElement('a');
+
                 let button = document.createElement('button');
 
                 div.className = 'cardImage';
@@ -86,15 +89,19 @@
                 button.className = 'btn btn-warning';
                 button.innerHTML = 'Descargar'
                 button.id = 'btnDescarga';
+                tagName.download = data[i].image;
+                tagName.href = data[i].image;
+
 
                 description.innerHTML = data[i].description;
                 image.src = data[i].image;
                 date.innerHTML = data[i].fecha;
 
+                tagName.appendChild(button);
                 div.appendChild(image);
                 div.appendChild(description);
                 div.appendChild(date);
-                div.appendChild(button);
+                div.appendChild(tagName);
                 col.appendChild(div);
                 contenedor.appendChild(col);
 
