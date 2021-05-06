@@ -10,59 +10,67 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <title>Taller N.4 </title>
     <link rel="stylesheet" href="CSS/index.css">
+
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 80px;">
-    <a class="navbar-brand " href="index.html">
-        <img width="120px" height="100px" src="https://estebancardenas14.github.io/ProgrammingWorkshop-2.github.io/img/logo.svg" alt="logoPets" style="margin-left: 150px;" />
-    </a>
-    <a><img width="70px" alt="" src=""></a>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 80px;">
+        <a class="navbar-brand " href="index.html">
+            <img width="120px" height="100px" src="https://estebancardenas14.github.io/ProgrammingWorkshop-2.github.io/img/logo.svg" alt="logoPets" style="margin-left: 150px;" />
+        </a>
+        <a><img width="70px" alt="" src=""></a>
+    </nav>
 
 
-<div class="container">
-    <div id="biblioteca">
-        <hr style="color: white; height: 3px;">
-        <h4 style="color: azure;" class="text-center">Biblioteca de imagenes</h4>
-        <hr style="color: white; height: 3px;">
-    </div>
-</div>
-
-
-<div class="container" id="bibliotecaImg">
-
-    <div class="row" id="IngresarFoto">
-
-
+    <div class="container">
+        <div id="biblioteca">
+            <hr style="color: white; height: 3px;">
+            <h4 style="color: azure;" class="text-center">Biblioteca de imagenes</h4>
+            <hr style="color: white; height: 3px;">
+        </div>
     </div>
 
-</div>
+
+    <div class="container" id="bibliotecaImg">
+
+        <div class="row" id="IngresarFoto">
+
+
+        </div>
+
+    </div>
 
     <script>
-
-        let url = chrome.runtime.getURL("data.json")
-
-        const ubicacion = url;
-
-
-        async function getData() {
-
-            const response = await fetch(ubicacion);
-            const data = await response.json();
-
-
-            crearCards(data);
-
+        function readTextFile(file, callback) {
+            var rawFile = new XMLHttpRequest();
+            rawFile.overrideMimeType("application/json");
+            rawFile.open("GET", file, true);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4 && rawFile.status == "200") {
+                    callback(rawFile.responseText);
+                }
+            }
+            rawFile.send(null);
         }
 
 
-        getData();
+        readTextFile("/target/taller-4-1.0-SNAPSHOT/data.json", function(text) {
+            var data = JSON.parse(text);
+            console.log(data[0].description);
 
-        function crearCards(data) {
+            var size = data.length;
 
-            for (i = 0; i < 50 ; i++) {
+            console.log(size);
+
+            crearCards(data, size);
+
+        });
+
+
+        function crearCards(data, size) {
+
+            for (i = 0; i < size; i++) {
 
                 let contenedor = document.getElementById('IngresarFoto');
 
@@ -79,9 +87,9 @@
                 button.innerHTML = 'Descargar'
                 button.id = 'btnDescarga';
 
-                description.innerHTML = data.description[i];
-                image.src = data.image[i];
-                date.innerHTML = data.fecha[i];
+                description.innerHTML = data[i].description;
+                image.src = data[i].image;
+                date.innerHTML = data[i].fecha;
 
                 div.appendChild(image);
                 div.appendChild(description);
@@ -93,8 +101,6 @@
             }
 
         }
-
-
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js " integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf " crossorigin="anonymous "></script>
 
