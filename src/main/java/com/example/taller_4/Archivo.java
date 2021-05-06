@@ -14,7 +14,9 @@ public class Archivo {
 
     private ObjectInputStream entrada;
     private ObjectOutputStream salida;
+    public Archivo(){
 
+    }
     public Archivo(File archivo) {
         if (!archivo.exists()) {
             try {

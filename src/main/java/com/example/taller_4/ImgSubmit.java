@@ -1,6 +1,8 @@
 package com.example.taller_4;
 import com.google.gson.Gson;
 
+import com.google.gson.Gson;
+
 import javax.persistence.TemporalType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,7 +15,9 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import java.util.stream.Collectors;
+
 
 import static com.example.taller_4.Constants.UPLOAD_DIRECTORY;
 
@@ -23,6 +27,7 @@ public class ImgSubmit extends HttpServlet {
     private String ImageName;
     private String nameUser;
     private Gson gson = new Gson();
+
     private Archivo archivo;
     private static final long serialVersionUID = 1L;
     private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -63,12 +68,16 @@ public class ImgSubmit extends HttpServlet {
             setImageName(fileName);
             String fecha = String.valueOf(LocalDateTime.now());
 
-            addUser(nameUser, fileName, Description, fecha, usuarios);
-            usuarios = archivo.leerArchivo(new File(x + "Archivo.txt"));
+            x = uploadPath + File.separator ;
+            archivo = new Archivo(new File(x+"/Archivo.txt"));
+
+            addUser(nameUser, fileName, Description, fecha,usuarios);
+            usuarios = archivo.leerArchivo(new File(x+"/Archivo.txt"));
 
             String j = gson.toJson(usuarios);
 
-            crearJson(j, x);
+            crearJson(j,x);
+
 
         } catch (FileNotFoundException fne) {
             request.setAttribute("message", "There was an error: " + fne.getMessage());
@@ -100,7 +109,6 @@ public class ImgSubmit extends HttpServlet {
         Usuario newUser = new Usuario(nameUser, nameIMG, description, date);
         System.out.println("Nombre de usuarioooo" + nameUser);
         user.add(newUser);
-
         archivo.escribirEnArchivo(user, x + "Archivo.txt");
         verificar = true;
 
@@ -110,6 +118,7 @@ public class ImgSubmit extends HttpServlet {
     public void setImageName(String imageName) {
         ImageName = imageName;
     }
+
 
     public void crearJson(String jso, String na) {
 

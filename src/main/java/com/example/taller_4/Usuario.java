@@ -49,6 +49,7 @@ public class Usuario implements Serializable {
         this.image = image;
     }
 
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -58,4 +59,5 @@ public class Usuario implements Serializable {
                 ", image='" + image + '\'' +
                 '}';
     }
+
 }
