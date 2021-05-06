@@ -23,7 +23,7 @@ public class ImgSubmit extends HttpServlet {
     private String ImageName;
     private String nameUser;
     private Gson gson = new Gson();
-    private Archivo archivo = new Archivo(new File("Archivo.txt"));
+    private Archivo archivo = new Archivo();
     private static final long serialVersionUID = 1L;
     private ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
     private String x = "";
@@ -37,7 +37,6 @@ public class ImgSubmit extends HttpServlet {
         String Description = request.getParameter("descriptionIMG");
         String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
         File uploadDir = new File(uploadPath);
-
 
 
 
@@ -60,10 +59,11 @@ public class ImgSubmit extends HttpServlet {
             request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
             setImageName(fileName);
             String fecha = String.valueOf(LocalDateTime.now());
-
+            x = uploadPath + File.separator ;
+            archivo = new Archivo(new File(x+"/Archivo.txt"));
 
             addUser(nameUser, fileName, Description, fecha,usuarios);
-            x = uploadPath + File.separator ;
+            usuarios = archivo.leerArchivo(new File(x+"/Archivo.txt"));
 
             String j = gson.toJson(usuarios);
 
