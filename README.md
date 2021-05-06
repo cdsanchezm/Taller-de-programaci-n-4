@@ -11,6 +11,5 @@ ciudadanos de cuatro patas de la alcaldia, en esta parte lo que logramos hacer e
 en la cual es posible ingresar con un nombre de usuario y poder cargar imagenes ademas de esto tambien es posible 
 agregar una descripción de la imagen, todo esto se realizo por medio de la arquitectura de JavaEE, servlets, JPA, JavaBeans.  
 
-## Git Pages 💻
 
 ## Video Explicativo 🎥
