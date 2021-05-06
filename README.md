@@ -13,3 +13,10 @@ agregar una descripción de la imagen, todo esto se realizo por medio de la arqu
 
 
 ## Video Explicativo 🎥
+
+
+##Integrantes 👋
+- Paula Andrea Anaya Ramirez 
+- Andres Felipe Galvis Bolivar 
+- Cristian David Sanchez Malagon 
+- Esteban Cardenas Cortez
