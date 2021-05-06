@@ -11,6 +11,9 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.example.taller_4.Constants.UPLOAD_DIRECTORY;
 
@@ -23,16 +26,21 @@ public class ImgSubmit extends HttpServlet {
     private Archivo archivo = new Archivo(new File("Archivo.txt"));
     private static final long serialVersionUID = 1L;
     private ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
+    private String x = "";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            usuarios = archivo.leerArchivo(new File("Archivo.txt"));
 
-            System.out.println("Este es el objeto de los Json"+gson.toJson(usuarios) );
+
+
 
 
         String Description = request.getParameter("descriptionIMG");
         String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
         File uploadDir = new File(uploadPath);
+
+
+
+
         if (!uploadDir.exists())
             uploadDir.mkdir();
         try {
@@ -41,11 +49,6 @@ public class ImgSubmit extends HttpServlet {
             for (Part part : request.getParts()) {
                 fileName = getFileName(part);
                 part.write(uploadPath + File.separator + fileName);
-
-
-
-
-
             }
 
             Cookie[] cookies = request.getCookies();
@@ -60,6 +63,12 @@ public class ImgSubmit extends HttpServlet {
 
 
             addUser(nameUser, fileName, Description, fecha,usuarios);
+            x = uploadPath + File.separator ;
+
+            String j = gson.toJson(usuarios);
+
+            crearJson(j,x);
+
         } catch (FileNotFoundException fne) {
             request.setAttribute("message", "There was an error: " + fne.getMessage());
         }
@@ -89,7 +98,7 @@ public class ImgSubmit extends HttpServlet {
         Usuario newUser = new Usuario(nameUser, nameImage, description, date);
         user.add(newUser);
 
-        archivo.escribirEnArchivo(user, "Archivo.txt");
+        archivo.escribirEnArchivo(user, x+"/Archivo.txt");
         verificar = true;
 
         return verificar;
@@ -97,6 +106,15 @@ public class ImgSubmit extends HttpServlet {
 
     public void setImageName(String imageName) {
         ImageName = imageName;
+    }
+    public void crearJson(String jso ,String na){
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(na+"Data.json"))) {
+            bw.write(jso);
+            System.out.println("Fichero creado");
+        } catch (IOException ex) {
+            Logger.getLogger(ImgSubmit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 
