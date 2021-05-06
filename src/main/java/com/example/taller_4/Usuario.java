@@ -53,4 +53,5 @@ public class Usuario implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
 }

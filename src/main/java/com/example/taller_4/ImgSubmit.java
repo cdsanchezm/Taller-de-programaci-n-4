@@ -1,5 +1,7 @@
 package com.example.taller_4;
 
+import com.google.gson.Gson;
+
 import javax.persistence.TemporalType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,11 +19,17 @@ import static com.example.taller_4.Constants.UPLOAD_DIRECTORY;
 public class ImgSubmit extends HttpServlet {
     private String ImageName;
     private String nameUser;
+    private Gson gson = new Gson();
     private Archivo archivo = new Archivo(new File("Archivo.txt"));
     private static final long serialVersionUID = 1L;
     private ArrayList<Usuario> usuarios=new ArrayList<Usuario>();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        usuarios = archivo.leerArchivo(new File("Archivo.txt"));
+
+            usuarios = archivo.leerArchivo(new File("Archivo.txt"));
+
+            System.out.println("Este es el objeto de los Json"+gson.toJson(usuarios) );
+
+
         String Description = request.getParameter("descriptionIMG");
         String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
         File uploadDir = new File(uploadPath);
@@ -33,6 +41,11 @@ public class ImgSubmit extends HttpServlet {
             for (Part part : request.getParts()) {
                 fileName = getFileName(part);
                 part.write(uploadPath + File.separator + fileName);
+
+
+
+
+
             }
 
             Cookie[] cookies = request.getCookies();
@@ -43,11 +56,10 @@ public class ImgSubmit extends HttpServlet {
             }
             request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
             setImageName(fileName);
-            response.addCookie(new Cookie("ImageName", getImageName()));
             String fecha = String.valueOf(LocalDateTime.now());
-            response.addCookie(new Cookie("Fecha", fecha));
-            response.addCookie(new Cookie("Description", Description));
-            addUser(nameUser, getImageName(), Description, fecha,usuarios);
+
+
+            addUser(nameUser, fileName, Description, fecha,usuarios);
         } catch (FileNotFoundException fne) {
             request.setAttribute("message", "There was an error: " + fne.getMessage());
         }
@@ -56,11 +68,15 @@ public class ImgSubmit extends HttpServlet {
     }
 
     private String getFileName(Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename"))
-                return content.substring(content.indexOf("=") + 2, content.length() - 1);
+        String fileName = "",
+                contentDisposition = part.getHeader("content-disposition");
+        String[] items = contentDisposition.split(";");
+        for (String item : items) {
+            if (item.trim().startsWith("filename")) {
+                fileName = item.substring(item.indexOf("=") + 2, item.length() - 1);
+            }
         }
-        return Constants.DEFAULT_FILENAME;
+        return fileName;
     }
 
 
@@ -69,7 +85,6 @@ public class ImgSubmit extends HttpServlet {
     }
 
     public boolean addUser(String nameUser, String nameImage, String description, String date, ArrayList<Usuario> user) {
-
         boolean verificar = false;
         Usuario newUser = new Usuario(nameUser, nameImage, description, date);
         user.add(newUser);
