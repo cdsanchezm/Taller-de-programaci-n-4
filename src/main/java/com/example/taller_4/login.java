@@ -13,12 +13,25 @@ public class login extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+
+        String dire="Formimage.html";
+
         String userName = request.getParameter("userName");
-        Cookie name = new Cookie("userName", userName);
-        response.addCookie(name);
         PrintWriter out = response.getWriter();
-        out.println(userName);
-        String dire = "Formimage.html";
-        response.sendRedirect(dire);
+        if (!userName.isEmpty()){
+            response.addCookie(new Cookie("userName",userName));
+            response.sendRedirect(dire);
+        }else {
+
+
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Por favor ingrese un usuario');");
+            out.println("location='index.html';");
+            out.println("</script>");
+
+        }
+
+
     }
+
 }

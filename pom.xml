@@ -9,13 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <name>taller-4</name>
     <packaging>war</packaging>
-
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <junit.version>5.7.1</junit.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -30,6 +28,7 @@
             <version>3.2.2</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -47,8 +46,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
