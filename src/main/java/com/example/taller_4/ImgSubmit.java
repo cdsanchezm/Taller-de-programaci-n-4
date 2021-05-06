@@ -9,6 +9,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,12 +67,12 @@ public class ImgSubmit extends HttpServlet {
             }
             request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
             setImageName(fileName);
-            String fecha = String.valueOf(LocalDateTime.now());
+            Date fecha = new Date();
 
             x = uploadPath + File.separator ;
             archivo = new Archivo(new File(x+"/Archivo.txt"));
 
-            addUser(nameUser, fileName, Description, fecha,usuarios);
+            addUser(nameUser, fileName, Description, usuarios);
             usuarios = archivo.leerArchivo(new File(x+"/Archivo.txt"));
 
             String j = gson.toJson(usuarios);
@@ -103,11 +104,13 @@ public class ImgSubmit extends HttpServlet {
         return ImageName;
     }
 
-    public boolean addUser(String nameUser, String nameImage, String description, String date, ArrayList<Usuario> user) {
+    public boolean addUser(String nameUser, String nameImage, String description, ArrayList<Usuario> user) {
         boolean verificar = false;
        String nameIMG = "/target/taller-4-1.0-SNAPSHOT/upload/"+nameImage;
-        Usuario newUser = new Usuario(nameUser, nameIMG, description, date);
-        System.out.println("Nombre de usuarioooo" + nameUser);
+        Date myDate = new Date();
+        String FechaFinal = new SimpleDateFormat("dd-MM-yyyy").format(myDate);
+        Usuario newUser = new Usuario(nameUser, nameIMG, description, FechaFinal);
+        System.out.println("Nombre de usuario" + nameUser);
         user.add(newUser);
         archivo.escribirEnArchivo(user, x + "Archivo.txt");
         verificar = true;

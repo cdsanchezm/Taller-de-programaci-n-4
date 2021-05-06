@@ -55,7 +55,7 @@
         }
 
 
-        readTextFile("/target/taller-4-1.0-SNAPSHOT/data.json", function(text) {
+        readTextFile("/target/taller-4-1.0-SNAPSHOT/upload/Data.json", function(text) {
             var data = JSON.parse(text);
             console.log(data[0].description);
 
@@ -77,8 +77,12 @@
                 let col = document.createElement('div');
                 let div = document.createElement('div');
                 let description = document.createElement('p');
+                let userName = document.createElement('h5');
                 let date = document.createElement('h6');
                 let image = document.createElement('img');
+
+                let tagName = document.createElement('a');
+
                 let button = document.createElement('button');
 
                 div.className = 'cardImage';
@@ -86,15 +90,21 @@
                 button.className = 'btn btn-warning';
                 button.innerHTML = 'Descargar'
                 button.id = 'btnDescarga';
+                tagName.download = data[i].image;
+                tagName.href = data[i].image;
+                userName.innerHTML = data[i].name;
+
 
                 description.innerHTML = data[i].description;
                 image.src = data[i].image;
-                date.innerHTML = data[i].fecha;
+                date.innerHTML = data[i].date;
 
+                tagName.appendChild(button);
+                div.appendChild(userName);
                 div.appendChild(image);
                 div.appendChild(description);
                 div.appendChild(date);
-                div.appendChild(button);
+                div.appendChild(tagName);
                 col.appendChild(div);
                 contenedor.appendChild(col);
 

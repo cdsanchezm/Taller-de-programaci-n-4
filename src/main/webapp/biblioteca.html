@@ -77,6 +77,7 @@
                 let col = document.createElement('div');
                 let div = document.createElement('div');
                 let description = document.createElement('p');
+                let userName = document.createElement('h5');
                 let date = document.createElement('h6');
                 let image = document.createElement('img');
 
@@ -91,13 +92,15 @@
                 button.id = 'btnDescarga';
                 tagName.download = data[i].image;
                 tagName.href = data[i].image;
+                userName.innerHTML = data[i].name;
 
 
                 description.innerHTML = data[i].description;
                 image.src = data[i].image;
-                date.innerHTML = data[i].fecha;
+                date.innerHTML = data[i].date;
 
                 tagName.appendChild(button);
+                div.appendChild(userName);
                 div.appendChild(image);
                 div.appendChild(description);
                 div.appendChild(date);
